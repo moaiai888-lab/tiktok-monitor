@@ -1,10 +1,12 @@
-name: Telegram Test
+name: TikTok Monitor
 
 on:
+  schedule:
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
-  send:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,11 +17,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install requests
-        run: pip install requests
+      - name: Install dependencies
+        run: |
+          pip install requests
 
-      - name: Run script
+      - name: Run monitor
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python send_test.py
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          python check_tiktok.py
