@@ -28,10 +28,11 @@ with open("last_video.txt", "r") as f:
     old_video = f.read().strip()
 
 if latest_video != old_video:
-   video_url = latest.get("webVideoUrl", "https://www.tiktok.com/@mokjuri")
-text = latest.get("text", "")
+    video_url = latest.get("webVideoUrl", "https://www.tiktok.com/@mokjuri")
+    text = latest.get("text", "")
 
-message = f"🎉 คลิปใหม่จาก TikTok\n\nช่อง: @mokjuri\n{text}\n\n{video_url}"
+    message = f"🎉 คลิปใหม่จาก TikTok\n\nช่อง: @mokjuri\n{text}\n\n{video_url}"
+
     requests.post(
         f"https://api.telegram.org/bot{TOKEN}/sendMessage",
         data={
